@@ -4,7 +4,7 @@
 
 require 'socket'
 
-class rhttpServer
+class RHTTPServer
 	def initialize(rootdir, port) 
 		@rootdir = rootdir
 		@port = port
@@ -17,7 +17,7 @@ class rhttpServer
 				Thread.new do
 					puts "\r\nClient connected :)"
 					puts "Launching worker for him..."
-					rhttpWorker.new(@rootdir, clientsocket).start
+					RHTTPWorker.new(@rootdir, clientsocket).start
 					 # Worker despacha la petición
 				end
 			end
@@ -25,7 +25,7 @@ class rhttpServer
 	end
 end
 
-class rhttpWorker
+class RHTTPWorker
 	def initialize(rootdir, socket)
 		@rootdir = rootdir
 		@socket = socket
@@ -165,5 +165,5 @@ end
 print "Número de puerto: "
 port = gets.chomp
 #puts "Iniciando servidor..."
-server = rhttpServer.new("www", port)
+server = RHTTPServer.new("www", port)
 server.start
